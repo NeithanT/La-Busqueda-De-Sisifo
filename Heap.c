@@ -27,57 +27,35 @@ void swap(int* a, int* b) {
     *b = temp;
 }
 
-int parent(int i) {
-    return floor((i - 1) / 2);
+int parent(int index) {
+    return floor((index - 1) / 2);
 }
 
-int leftChild(int i) {
-    return 2 * i + 1;
+int leftChild(int index) {
+    return 2 * index + 1;
 }
 
-int rightChild(int i) {
-    return 2 * i + 2;
-}
-
-void heapifyUp(struct Heap* heap, int index) {
-    while (index > 0 && heap->array[parent(index)] > heap->array[index]) {
-        swap(&heap->array[parent(index)], &heap->array[index]);
-        index = parent(index);
-    }
-}
-
-void heapifyDown(struct Heap* heap, int index) {
-    int smallest = index;
-    int left = leftChild(index);
-    int right = rightChild(index);
-    if (left < heap->size && heap->array[left] < heap->array[smallest]) {
-        smallest = left;
-    }
-    if (right < heap->size && heap->array[right] < heap->array[smallest]) {
-        smallest = right;
-    }
-    if (smallest != index) {
-        swap(&heap->array[index], &heap->array[smallest]);
-        heapifyDown(heap, smallest);
-    }
-}
-
-int isEmpty(struct Heap* heap) {
-    return heap->size == 0;
+int rightChild(int index) {
+    return 2 * index + 2;
 }
 
 int isFull(struct Heap* heap) {
-    return heap->size == heap->capacity;
+    return heap->size >= heap->capacity;
 }
 
-void insert(struct Heap* heap, int value) {
+int insert(struct Heap* heap, int value) {
+
+    if (heap == NULL) {
+        return -1;
+    }
+
     if (isFull(heap)) {
-        printf("Heap is full\n");
+        printf("Estamos cocinados\n");
         return;
     }
+
     heap->array[heap->size] = value;
     heap->size++;
-    heapifyUp(heap, heap->size - 1);
 }
 
 int deleteMin(struct Heap* heap) {
@@ -92,10 +70,14 @@ int deleteMin(struct Heap* heap) {
     return min;
 }
 
-int peekMin(struct Heap* heap) {
-    if (isEmpty(heap)) {
-        printf("Heap is empty\n");
+int freeHeap(struct Heap* heap) {
+
+    if (heap == NULL) {
         return -1;
     }
-    return heap->array[0];
+
+    free(heap->array);
+    free(heap);
+
+    return 0;
 }
