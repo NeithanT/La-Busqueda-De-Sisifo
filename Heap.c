@@ -22,35 +22,10 @@ struct Heap* create_heap(int capacity) {
     return heap;
 }
 
-/* swap for primitive ints is not used - heap stores Text* now */
-
-// Swap for Text pointers
 void swap(struct Text** a, struct Text** b) {
     struct Text* tmp = *a;
     *a = *b;
     *b = tmp;
-}
-
-struct Text* delete_min(struct Heap* heap) {
-    if (!heap || heap->size == 0) return NULL;
-
-    struct Text* min = heap->texts[0];
-    heap->texts[0] = heap->texts[--heap->size];
-
-    // heapify down
-    int idx = 0;
-    while (1) {
-        int l = left_child(idx);
-        int r = right_child(idx);
-        int smallest = idx;
-        if (l < heap->size && heap->texts[l]->year < heap->texts[smallest]->year) smallest = l;
-        if (r < heap->size && heap->texts[r]->year < heap->texts[smallest]->year) smallest = r;
-        if (smallest == idx) break;
-        swap(&heap->texts[idx], &heap->texts[smallest]);
-        idx = smallest;
-    }
-
-    return min;
 }
 
 int parent(int index) {
@@ -85,15 +60,7 @@ int insert(struct Heap* heap, struct Text* value) {
         return -1;
     }
 
-    // insertar al final
-    int idx = heap->size++;
-    heap->texts[idx] = value;
-
-    // heapify up (min-heap basado en 'year')
-    while (idx > 0 && heap->texts[parent(idx)]->year > heap->texts[idx]->year) {
-        swap(&heap->texts[parent(idx)], &heap->texts[idx]);
-        idx = parent(idx);
-    }
+    heap->texts[heap->size++] = value;
 
     return 0;
 }
@@ -106,6 +73,7 @@ int free_heap(struct Heap* heap) {
 
     if (heap->texts) {
         
+        // TODO, esto deberia ser un free text
         for (int i = 0; i < heap->size; ++i) {
             if (heap->texts[i]) {
                 free(heap->texts[i]->author_name);
