@@ -60,20 +60,8 @@ int insert(struct heap* heap, int value) {
 
     heap->array[heap->size] = value;
     heap->size++;
-    heapify_up(heap, heap->size - 1);
+    
     return 0;
-}
-
-int delete_min(struct heap* heap) {
-    if (is_empty(heap)) {
-        printf("Heap is empty\n");
-        return -1;
-    }
-    int min = heap->array[0];
-    heap->array[0] = heap->array[heap->size - 1];
-    heap->size--;
-    heapify_down(heap, 0);
-    return min;
 }
 
 int free_heap(struct heap* heap) {

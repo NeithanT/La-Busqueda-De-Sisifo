@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include "menu.h"
 #define INTRO "menu.txt"
 
 
 int print_intro() {
 
-    FILE *file = fopen(INTRO, 'r');
+    FILE *file = fopen(INTRO, "r");
 
     if (file == NULL) {return -1;}
 
@@ -28,14 +28,17 @@ int show_menu() {
 
     while (choice != '5') {
 
-        printf("/n/n");
-        printf("/t/t 1 - Ordenador por Titulo de la publicacion");
-        printf("/t/t 2 - Ordenador por tamano en palabras");
-        printf("/t/t 3 - Ordenador por nombre del archivo");
-        printf("/t/t 4 - Ordenador por cantidad de palindromos en el abstract");
-        printf("/t/t 5 - Salir");
-        
+        printf("\n\n");
+        printf("\t\t 1 - Ordenador por Titulo de la publicacion \n");
+        printf("\t\t 2 - Ordenador por tamano en palabras \n");
+        printf("\t\t 3 - Ordenador por nombre del archivo \n");
+        printf("\t\t 4 - Ordenador por cantidad de palindromos en el abstract \n");
+        printf("\t\t 5 - Salir \n");
+        printf("\t\t     Escoge una opcion:");
+
         scanf("%c", &choice);
+        putchar('\n');
+        getchar();
 
         identify_choice(choice);
     }
@@ -47,15 +50,26 @@ int identify_choice(char c) {
     switch (c)
     {
     case '1':
-        break;
+        
+        return 0;
     case '2':
-        break;
+        
+        return 0;
     case '3':
-        break;
+        
+        return 0;
     case '4':
-        break;
+        
+        return 0;
+    case '5':
+        
+        return 0;
+
     default:
-        printf("\t\tOpcion Invalidad, asegurese de no tener espacios :%c", c);
+        printf("\t\tOpcion Invalida, asegurese de no tener espacios :%c \n", c);
+        return -1;
         break;
     }
+
+    return 0;
 }
