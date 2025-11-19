@@ -4,7 +4,7 @@
 
 // La propia estructura de Heap, es una lista en esteroides
 // Es un Min Heap
-struct Heap {
+struct heap {
 
     int* array;
     int size;
@@ -12,22 +12,22 @@ struct Heap {
 
 };
 
-struct Heap* createHeap(int capacity);
+struct heap* create_heap(int capacity);
 
 int parent(int index);
 
-int leftChild(int index);
+int left_child(int index);
 
-int rightChild(int index);
+int right_child(int index);
 
-int insert(struct Heap* heap, int value);
+int insert(struct heap* heap, int value);
 
-int deleteMin(struct Heap* heap);
+int delete_min(struct heap* heap);
 
 void swap(int* a, int* b);
 
-int isFull(struct Heap* heap);
+int is_full(struct heap* heap);
 
-int freeHeap(struct Heap* heap);
+int free_heap(struct heap* heap);
 
 #endif // HEAP_H

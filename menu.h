@@ -1,6 +1,8 @@
 #ifndef MENU_H
 #define MENU_H
 
-int showMenu();
+int print_intro();
+
+int show_menu();
 
 #endif //MENU_H
