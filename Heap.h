@@ -1,18 +1,29 @@
 #ifndef HEAP_H
 #define HEAP_H
 
+// La estructura de un archivo
+
+struct Text {
+
+    char* author_name;
+    char* author_last_names;
+    char* title;
+    char* ruta_relativa;
+    int year;
+    char* abstract;
+};
 
 // La propia estructura de Heap, es una lista en esteroides
 // Es un Min Heap
-struct heap {
+struct Heap {
 
-    int* array;
+    struct Text** texts;
     int size;
     int capacity;
 
 };
 
-struct heap* create_heap(int capacity);
+struct Heap* create_heap(int capacity);
 
 int parent(int index);
 
@@ -20,14 +31,18 @@ int left_child(int index);
 
 int right_child(int index);
 
-int insert(struct heap* heap, int value);
+int is_empty(struct Heap* heap);
 
-int delete_min(struct heap* heap);
+int insert(struct Heap* heap, struct Text* value);
 
-void swap(int* a, int* b);
+struct Text* delete_min(struct Heap* heap);
 
-int is_full(struct heap* heap);
+void swap(struct Text** a, struct Text** b);
 
-int free_heap(struct heap* heap);
+int is_full(struct Heap* heap);
+
+int free_heap(struct Heap* heap);
+
+struct Text* read_line(FILE *fp);
 
 #endif // HEAP_H
