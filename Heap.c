@@ -4,7 +4,7 @@
 #include "Heap.h"
 #include <ctype.h>
 
-#define ARCHIVOS "archivo.txt"
+#define ARCHIVOS "archivoPropios.txt"
 
 struct Heap* create_heap(int capacity) {
 
