@@ -4,6 +4,8 @@
 #include "Heap.h"
 #include <ctype.h>
 
+#define ARCHIVOS "archivos.txt"
+
 struct Heap* create_heap(int capacity) {
 
     struct Heap* heap = (struct Heap*)calloc(1, sizeof(struct Heap));
@@ -48,6 +50,16 @@ int is_empty(struct Heap* heap) {
     return heap->size == 0;
 }
 
+
+/**
+ * Funcion para agregar un elemento al heap
+ * Entradas:
+ *  heap: el heap al que se desea agregar el elemento
+ *  value: el valor a agregar al heap
+ * Salidas:
+ * -1: En caso de error como nulls
+ *  0: En caso de exito
+ */
 int insert(struct Heap* heap, struct Text* value) {
 
     if (heap == NULL) {
@@ -65,6 +77,20 @@ int insert(struct Heap* heap, struct Text* value) {
     return 0;
 }
 
+int free_text(struct Text* txt) {
+
+    if (txt == NULL) {
+        return -1;
+    }
+
+    free(txt->author_name);
+    free(txt->author_last_names);
+    free(txt->title);
+    free(txt->ruta_relativa);
+    free(txt->abstract);
+    free(txt);
+}
+
 int free_heap(struct Heap* heap) {
 
     if (heap == NULL) {
@@ -73,15 +99,9 @@ int free_heap(struct Heap* heap) {
 
     if (heap->texts) {
         
-        // TODO, esto deberia ser un free text
         for (int i = 0; i < heap->size; ++i) {
             if (heap->texts[i]) {
-                free(heap->texts[i]->author_name);
-                free(heap->texts[i]->author_last_names);
-                free(heap->texts[i]->title);
-                free(heap->texts[i]->ruta_relativa);
-                free(heap->texts[i]->abstract);
-                free(heap->texts[i]);
+                free_text(heap->texts[i]);
             }
         }
         free(heap->texts);
@@ -100,4 +120,19 @@ struct Text* read_line(FILE *fp) {
 
     //TODO esta vaina
     return text;
+}
+
+struct Heap* read_file() {
+
+    FILE *fp = fopen(ARCHIVOS, "r");
+
+    if (!fp) {
+        return NULL;
+    }
+
+    char buffer[256];
+
+    fread(buffer, sizeof(char), 256, fp);
+
+    int index = 0;
 }

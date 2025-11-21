@@ -45,4 +45,6 @@ int free_heap(struct Heap* heap);
 
 struct Text* read_line(FILE *fp);
 
+struct Heap* read_file();
+
 #endif // HEAP_H
