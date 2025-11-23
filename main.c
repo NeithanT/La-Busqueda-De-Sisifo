@@ -3,5 +3,5 @@
 
 int main() {
     show_menu();
-
+    return 0;
 }

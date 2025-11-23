@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "menu.h"
+#include "Sort.h"
 
 #define INTRO "menu.txt"
 
@@ -24,7 +25,8 @@ int print_intro() {
 int show_menu() {
 
     print_intro();
-
+    read_file();
+    
     char choice = 0;
 
     while (choice != '5') {
