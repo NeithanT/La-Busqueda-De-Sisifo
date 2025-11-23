@@ -1,48 +1,54 @@
 #ifndef HEAP_H
 #define HEAP_H
 
-// La estructura de un archivo
-
-struct Text {
-
-    char* author_name;
-    char* author_last_names;
-    char* title;
-    char* ruta_relativa;
-    int year;
-    char* abstract;
-};
-
-// La propia estructura de Heap, es una lista en esteroides
-// Es un Min Heap
-struct Heap {
-
-    struct Text** texts;
+// Heap para los textos de autor, titulo, etc
+struct HeapText {
+    char** texts;
     int size;
     int capacity;
-
 };
 
-struct Heap* create_heap(int capacity);
+// Heap para enteros, en este caso los a;os
+struct HeapYears {
+    int* years;
+    int size;
+    int capacity;
+};
 
+// Funciones generales
 int parent(int index);
-
 int left_child(int index);
-
 int right_child(int index);
 
-int is_empty(struct Heap* heap);
+// Funciones para textos
 
-int insert(struct Heap* heap, struct Text* value);
+struct HeapText* create_heap_text(int capacity);
 
-struct Text* delete_min(struct Heap* heap);
+int insert_text(struct HeapText* heap, char* value);
 
-void swap(struct Text** a, struct Text** b);
+char* delete_min_text(struct HeapText* heap);
 
-int is_full(struct Heap* heap);
+void swap_text(char** a, char** b);
 
-int free_heap(struct Heap* heap);
+int is_full_text(struct HeapText* heap);
 
-struct Text* read_line(FILE *fp);
+int is_empty_text(struct HeapText* heap);
+
+int free_heap_text(struct HeapText* heap);
+
+// Funciones para a;os years
+struct HeapYears* create_heap_years(int capacity);
+
+int insert_years(struct HeapYears* heap, int value);
+
+int delete_min_years(struct HeapYears* heap);
+
+void swap_years(int* a, int* b);
+
+int is_full_years(struct HeapYears* heap);
+
+int is_empty_years(struct HeapYears* heap);
+
+int free_heap_years(struct HeapYears* heap);
 
 #endif // HEAP_H
