@@ -37,4 +37,8 @@ int count_palindromes(const char* text);
 
 int is_palindrome(const char* word);
 
+void free_Text(struct Text* text);
+
+void remove_delimiter(char* str, char delimiter);
+
 #endif // SORT_H
