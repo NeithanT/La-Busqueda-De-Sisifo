@@ -25,7 +25,7 @@ int left_child(int index) {
 }
 
 /**
- * Devuelve el index de una raiz en un arbol heap
+ * Devuelve el index del hijo derecho en un arbol heap
  * Entrada: index i
  * Devuelve: el hijo derecho
  */
@@ -36,8 +36,11 @@ int right_child(int index) {
 // Funciones del heap para textos
 
 /**
- * 
- * 
+ * Funcion que hace calloc para un TextHeap
+ * Entrada:
+ *  capacity: entero que dice la capacidad del heao
+ * Salida:
+ *  HeapText* : el nuevo HeapText creado
  */
 struct HeapText* create_heap_text(int capacity) {
 
@@ -72,6 +75,9 @@ void swap_text(char** a, char** b) {
     *b = tmp;
 }
 
+/**
+ * Inserta texto a un heap, como un heap, en el ultimo posicion
+ */
 int insert_text(struct HeapText* heap, char* value) {
     if (heap == NULL || value == NULL) {
         return -1;
@@ -87,6 +93,13 @@ int insert_text(struct HeapText* heap, char* value) {
     return 0;
 }
 
+/**
+ * Elimina y devuelve el texto minimo del heap
+ * Entradas:
+ *  heap: puntero al HeapText
+ * Salidas:
+ *  char*: el texto en [0], o NULL si esta vacio
+ */
 char* delete_min_text(struct HeapText* heap) {
     if (heap == NULL || is_empty_text(heap)) {
         return NULL;
@@ -100,14 +113,35 @@ char* delete_min_text(struct HeapText* heap) {
     return min;
 }
 
+/**
+ * Verifica si el heap de textos esta lleno
+ * Entradas:
+ *  heap: puntero al heap
+ * Salidas:
+ *  int: 1 si esta lleno, 0 si no
+ */
 int is_full_text(struct HeapText* heap) {
     return heap->size >= heap->capacity;
 }
 
+/**
+ * checkea si el heap de textos esta vacio
+ * Entradas:
+ *  heap: puntero al heao
+ * Salidas:
+ *  int: 1 si esta vacio(size 0), 0 si no
+ */
 int is_empty_text(struct HeapText* heap) {
     return heap->size == 0;
 }
 
+/**
+ * hace free ...
+ * Entradas:
+ *  heap: puntero al heap
+ * Salidas:
+ *  int: 0 exito, -1 error
+ */
 int free_heap_text(struct HeapText* heap) {
     if (heap == NULL) {
         return -1;
@@ -127,6 +161,13 @@ int free_heap_text(struct HeapText* heap) {
 
 // Funciones de heap para enteros/years/a;os en este caso
 
+/**
+ * Crea un nuevo heap para years
+ * Entradas:
+ *  capacity: capacidad del heap
+ * Salidas:
+ *  HeapYears*: puntero al nuevo heap, o NULL si fue error
+ */
 struct HeapYears* create_heap_years(int capacity) {
 
     struct HeapYears* heap = (struct HeapYears*)calloc(1, sizeof(struct HeapYears));
@@ -145,12 +186,28 @@ struct HeapYears* create_heap_years(int capacity) {
     return heap;
 }
 
+/**
+ * Intercambia dos valores enteros
+ * Entradas:
+ *  a: puntero al primer int
+ *  b: puntero al segundo int
+ * Salidas:
+ *  no
+ */
 void swap_years(int* a, int* b) {
     int tmp = *a;
     *a = *b;
     *b = tmp;
 }
 
+/**
+ * Inserta un tiempo/a;o en el heap
+ * Entradas:
+ *  heap: puntero al heap
+ *  value: el valor a insertar
+ * Salidas:
+ *  int: 0 si fue exito, -1 error
+ */
 int insert_years(struct HeapYears* heap, int value) {
 
     if (heap == NULL) {
@@ -166,6 +223,13 @@ int insert_years(struct HeapYears* heap, int value) {
     return 0;
 }
 
+/**
+ * Elimina y devuelve el [0] del heap
+ * Entradas:
+ *  heap: puntero al heap
+ * Salidas:
+ *  int: el valor en [0], -1 si error
+ */
 int delete_min_years(struct HeapYears* heap) {
     if (heap == NULL || is_empty_years(heap)) {
         return -1;
@@ -178,14 +242,35 @@ int delete_min_years(struct HeapYears* heap) {
     return min;
 }
 
+/**
+ * Verifica si el heap de years esta lleno
+ * Entradas:
+ *  heap: puntero al heap
+ * Salidas:
+ *  int: 1 si lleno, 0 si no
+ */
 int is_full_years(struct HeapYears* heap) {
     return heap->size >= heap->capacity;
 }
 
+/**
+ * Verifica si el heap de años esta vacio
+ * Entradas:
+ *  heap: puntero al HeapYears
+ * Salidas:
+ *  int: 1 si vacio, 0 si no
+ */
 int is_empty_years(struct HeapYears* heap) {
     return heap->size == 0;
 }
 
+/**
+ * Libera la memoria del heap de years
+ * Entradas:
+ *  heap: puntero al heap
+ * Salidas:
+ *  int: 0 si exito, -1 si error
+ */
 int free_heap_years(struct HeapYears* heap) {
     if (heap == NULL) {
         return -1;
